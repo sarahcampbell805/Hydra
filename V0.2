@@ -1,0 +1,18 @@
+bpm=100
+
+a.show()
+
+//src(o0).modulate(noise(3),0.005).blend(shape(4),0.01).out(o0)
+
+//osc(6).rotate(1).color(1,[7],4)
+
+s0.initScreen()
+s1.initCam()
+src(s1).out(o3)
+src(s0).colorama(() => Math.PI * mouse.x /.7).out(o0)
+osc().out(o1)
+src(s2).kaleid(() => Math.PI * mouse.y /180).out(o2)
+
+src(o0).blend(o3).out(o2)
+
+render(o2)
