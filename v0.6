@@ -1,0 +1,43 @@
+// licensed with CC BY-NC-SA 4.0 https://creativecommons.org/licenses/by-nc-sa/4.0/
+//random trypophobia - changes everytime you load it!
+//by Ritchse
+//instagram.com/ritchse
+ 
+function r(min=0,max=1) { return Math.random()*(max-min)+min; }
+ 
+bpm=100
+
+a.show()
+
+//src(o0).modulate(noise(3),0.005).blend(shape(4),0.01).out(o0)
+
+//osc(6).rotate(1).color(1,[7],4)
+
+s0.initScreen()
+s1.initCam()
+
+
+src(s1).out(o3)
+src(s0).hue(() => Math.PI * mouse.x /180).out(o0)
+//osc.kaleid().out(o1)
+src(s1).kaleid(() => Math.PI * mouse.y /180).out(o1)
+//src(s0).invert(1,-1).modulate(noise(3),()=>a.fft[0]).colorama(.07).out(o0)
+
+src(s0).modulate(noise(3),()=>a.fft[0.07]).color(.001).blend().out(o2)
+
+src(o0).blend(o3).blend(o1).out(o2)
+
+
+
+solid(1,1,1)
+  	.diff(shape([4,4,4,24].smooth().fast(.5),r(0.6,0.93),.09).repeat(20,10))
+	.modulateScale(osc(8).rotate(r(-.5,.5)),.52)
+	.add(
+  		src(o0).scale(0.965).rotate(.012*(Math.round(r(-2,1))))
+  		.color(r(),r(),r())
+    	.modulateRotate(o0,r(0,0.5))
+  		.brightness(1)
+  		,.7)
+	.out(o2)
+
+render(o2)
