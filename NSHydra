@@ -1,0 +1,79 @@
+
+//webcam -s1
+//S Microscope -s2
+//N Microscope-s3
+a.show()
+
+bpm=10
+
+s1.initCam(0)
+
+src(s1)
+.hue(() => a.fft[2])
+                .out(o0)
+
+
+
+
+
+
+s2.initCam(1)
+src(s2).
+hue(
+  () => -mouse.x/10)
+  
+  
+  .out(o1)
+
+
+
+s3.initCam(2)
+
+
+src(o1).invert(-.6).brightness(-.05).contrast(3)
+//.mask(o1)
+//.add(o3)
+
+.blend(o0)
+
+
+
+.out(o3)
+
+
+
+
+
+src(o0)
+  .modulateHue(src(o0).scale(1.01),1)
+  .layer(osc(4,0.5,2).mask(src(o1)))
+  .out(o2)
+
+//src(s3).add(src(s2)).mask(src(s3)).out(o3)
+
+
+render()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
